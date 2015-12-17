@@ -22,8 +22,8 @@ if (UNIX)
 	if (VLINDER_USING_CXX11)
 		set(CMAKE_CXX_FLAGS                "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
 
-		find_library(ATOMIC_LIB atomic)
-		append(EXTRA_LIBS ${ATOMIC_LIB})
+		#find_library(ATOMIC_LIB atomic)
+		#list(APPEND EXTRA_LIBS ${ATOMIC_LIB})
 
 		# Compiler-specific C++11 activation.
 		if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
