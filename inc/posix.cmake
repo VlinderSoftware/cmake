@@ -1,41 +1,4 @@
 if (UNIX)
-	find_package(Threads)
-	include (CheckLibraryExists)
-	check_library_exists(pthread pthread_timedjoin_np "" HAVE_PHTREAD_TIMEDJOIN_NP)
-	set(CMAKE_C_FLAGS "-g -O2 -Wall -W -Wno-multichar -Wshadow -Wunused-variable -Wno-unused-parameter -Wunused-function -Wunused -Wno-unused-local-typedefs -Wno-system-headers -Wwrite-strings -fprofile-arcs -ftest-coverage -save-temps -DVLINDER_TARGET_POSIX")
-	if (${CYGWIN})
-		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DVLINDER_TARGET_CYGWIN -DVLINDER_TARGET_WIN32")
-	elseif(${MINGW})
-		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DVLINDER_TARGET_MINGW -DVLINDER_TARGET_WIN32")
-	else()
-		set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
-	endif()
-	set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated -Woverloaded-virtual")
- 
 	set(VLINDER_TARGET_PLATFORM_NAME posix)
-
-	set(CMAKE_CXX_FLAGS_DEBUG          "-O0 -g")
-	set(CMAKE_CXX_FLAGS_MINSIZEREL     "-Os -DNDEBUG")
-	set(CMAKE_CXX_FLAGS_RELEASE        "-O4 -DNDEBUG")
-	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
-
-	if (VLINDER_USING_CXX11)
-		set(CMAKE_CXX_FLAGS                "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
-
-		#find_library(ATOMIC_LIB atomic)
-		#list(APPEND EXTRA_LIBS ${ATOMIC_LIB})
-
-		# Compiler-specific C++11 activation.
-		if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
-			execute_process(
-			COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
-			if (NOT (GCC_VERSION VERSION_GREATER 4.7 OR GCC_VERSION VERSION_EQUAL 4.7))
-				message(FATAL_ERROR "${PROJECT_NAME} requires g++ 4.7 or greater.")
-			endif ()
-		elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
-			set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
-		else ()
-			message(FATAL_ERROR "Your C++ compiler does not support C++11.")
-		endif ()
-	endif()
+	add_definitions(-DVLINDER_TARGET_POSIX)
 endif()
