@@ -1,3 +1,6 @@
 [submodule "modules"]
 	path = modules
 	url = https://github.com/bilke/cmake-modules.git
+[submodule "extra-cmake-modules"]
+	path = extra-cmake-modules
+	url = https://github.com/KDE/extra-cmake-modules.git
